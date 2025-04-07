@@ -22,27 +22,51 @@
     >
       <mat-nav-list class="flex-column d-flex">
         <ul class="sidenav-list">
-          <li class="list-item">
-            <span><mat-icon>home</mat-icon></span>
-            <p>Home</p>
+          <li
+            class="list-item"
+            routerLink="/home/dashboard"
+            (click)="backToDashboard()"
+          >
+            <span><mat-icon>dashboard</mat-icon></span>
+            <p>Dashboard</p>
           </li>
-          <li class="list-item">
+          <li
+            class="list-item"
+            routerLink="/home/felinos"
+            (click)="backToFelinos()"
+          >
             <span><mat-icon>pets</mat-icon></span>
             <p>Felinos</p>
           </li>
-          <li class="list-item">
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToVacinas()"
+          >
             <span><mat-icon>vaccines</mat-icon></span>
             <p>Vacinas</p>
           </li>
-          <li class="list-item">
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToProcedimentos()"
+          >
             <span><mat-icon>local_hospital</mat-icon></span>
-            <p>Hospitalização</p>
+            <p>Procedimentos</p>
           </li>
-          <li class="list-item">
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToVoluntarios()"
+          >
             <span><mat-icon>group</mat-icon></span>
             <p>Voluntários</p>
           </li>
-          <li class="list-item">
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToUsuarios()"
+          >
             <span><mat-icon>manage_accounts</mat-icon></span>
             <p>Usuários</p>
           </li>
