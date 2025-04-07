@@ -1,0 +1,39 @@
+<div class="app-container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon class="menu">menu</mat-icon>
+    </button>
+    <h1 class="title">Gestão Felinos</h1>
+    <mat-icon class="fixed-right">logout</mat-icon>
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      opened
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list>
+        <ul class="sidenav-list">
+          <li class="list-item" routerLink="/home/liderancas">
+            <span><mat-icon>groups</mat-icon></span>
+            <p>Pessoas</p>
+          </li>
+          <li class="list-item">
+            <span><mat-icon>home</mat-icon></span>
+            <p>Home</p>
+          </li>
+        </ul>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="background-content content-container">
+      <ng-content select="[drawer-content]"></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
