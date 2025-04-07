@@ -4,7 +4,9 @@
       <mat-icon class="menu">menu</mat-icon>
     </button>
     <h1 class="title">Gestão Felinos</h1>
-    <mat-icon class="fixed-right">logout</mat-icon>
+    <button mat-icon-button class="fixed-right">
+      <mat-icon class="logout">logout</mat-icon>
+    </button>
   </mat-toolbar>
 
   <mat-sidenav-container
@@ -18,15 +20,31 @@
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
     >
-      <mat-nav-list>
+      <mat-nav-list class="flex-column d-flex">
         <ul class="sidenav-list">
-          <li class="list-item" routerLink="/home/liderancas">
-            <span><mat-icon>groups</mat-icon></span>
-            <p>Pessoas</p>
-          </li>
           <li class="list-item">
             <span><mat-icon>home</mat-icon></span>
             <p>Home</p>
+          </li>
+          <li class="list-item">
+            <span><mat-icon>pets</mat-icon></span>
+            <p>Felinos</p>
+          </li>
+          <li class="list-item">
+            <span><mat-icon>vaccines</mat-icon></span>
+            <p>Vacinas</p>
+          </li>
+          <li class="list-item">
+            <span><mat-icon>local_hospital</mat-icon></span>
+            <p>Hospitalização</p>
+          </li>
+          <li class="list-item">
+            <span><mat-icon>group</mat-icon></span>
+            <p>Voluntários</p>
+          </li>
+          <li class="list-item">
+            <span><mat-icon>manage_accounts</mat-icon></span>
+            <p>Usuários</p>
           </li>
         </ul>
       </mat-nav-list>
