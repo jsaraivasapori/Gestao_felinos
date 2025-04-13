@@ -41,3 +41,17 @@ th {
 .icon-border-width-bottom {
   border-bottom-width: 1px;
 }
+
+mat-icon {
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+  vertical-align: middle;
+
+  &.positive {
+    color: #f44336;
+  } /* Vermelho para true */
+  &.negative {
+    color: #42a746;
+  } /* Verde para false */
+}

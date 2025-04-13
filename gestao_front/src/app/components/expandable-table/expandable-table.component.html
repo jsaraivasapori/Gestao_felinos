@@ -5,12 +5,26 @@
   class="mat-elevation-z8"
 >
   <!-- Colunas Dinâmicas -->
+  <!-- Cria os templates para cada tipo de célula (cabeçalho e corpo)
+       Define como cada coluna deve ser renderizada. Faz o macth entre
+      célula da coluna com seu respectiva celula da linha  -->
+
   @for (column of columnsToDisplay; track column) {
   <ng-container [matColumnDef]="column">
     <th mat-header-cell *matHeaderCellDef>
       {{ columnHeaders[column] || column }}
     </th>
-    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    <td mat-cell *matCellDef="let element">
+      @if (isBooleanColumn(element[column])) {
+      <mat-icon
+        [class.positive]="element[column]"
+        [class.negative]="!element[column]"
+        >{{ element[column] | booleanIcon }}</mat-icon
+      >
+      } @else {
+      {{ element[column] }}
+      }
+    </td>
   </ng-container>
   }
 
@@ -54,7 +68,11 @@
   </ng-container>
 
   <!-- Linhas -->
+
+  <!--Rendeiza os cabeçalhos das colunas-->
   <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+
+  <!--Renderiza as linhas de dados-->
   <tr
     mat-row
     *matRowDef="let row; columns: columnsToDisplayWithExpand"

@@ -17,11 +17,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { BooleanIconPipe } from '../../pipes/boolean-icon/boolean-icon.pipe';
 
 @Component({
   selector: 'app-expandable-table',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    BooleanIconPipe,
+  ],
   templateUrl: './expandable-table.component.html',
   styleUrl: './expandable-table.component.scss',
   animations: [
@@ -57,5 +64,8 @@ export class ExpandableTableComponent<T extends { [key: string]: any }> {
   toggleRow(element: T): void {
     this.expandedElement = this.expandedElement === element ? null : element;
     this.rowToggled.emit(this.expandedElement);
+  }
+  isBooleanColumn(value: any): boolean {
+    return typeof value === 'boolean';
   }
 }
