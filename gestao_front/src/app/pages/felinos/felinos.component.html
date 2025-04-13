@@ -1,3 +1,36 @@
+<h1>Felinos</h1>
 <div class="container-fluid">
-  <h1>Felinos</h1>
+  <div class="teste">
+    <app-expandable-table
+      [dataSource]="elementos"
+      [columnsToDisplay]="[
+        'nome',
+        'idade',
+        'raca',
+        'fiv',
+        'felv',
+        'pif',
+        'isolamento'
+      ]"
+      [columnHeaders]="{
+        nome: 'Nome',
+        idade: 'Idade (anos)',
+        raca: 'Raça',
+        fiv: 'FIV',
+        felv: 'FELV',
+        pif: 'PIF',
+        isolamento: 'Isolamento'
+      }"
+      (rowToggled)="onRowToggled($event)"
+    >
+      <ng-template #expandedRowContent let-element>
+        <div class="custom-expanded-content">
+          <h3>Detalhes de {{ element.nome }}</h3>
+          <p>Cargo: {{ element.cargo }}</p>
+          <p>Idade: {{ element.idade }}</p>
+          <p>Departamento: {{ element.departamento }}</p>
+        </div>
+      </ng-template>
+    </app-expandable-table>
+  </div>
 </div>
