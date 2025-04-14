@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class BooleanIconPipe implements PipeTransform {
   transform(value: boolean): string {
-    return value ? 'close' : 'add';
+    return value ? 'remove' : 'add';
   }
 }
