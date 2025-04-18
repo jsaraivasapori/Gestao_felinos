@@ -1,0 +1,80 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mb-3" *ngFor="let field of formConfig">
+        <ng-container [ngSwitch]="field.type">
+          <!-- Input padrão (texto, email, etc.) -->
+          <mat-form-field
+            *ngSwitchDefault
+            appearance="fill"
+            style="width: 100%"
+          >
+            <mat-label>{{ field.label }}</mat-label>
+            <input
+              matInput
+              [formControlName]="field.name"
+              [type]="field.type"
+            />
+            <!-- Mensagens de erro com mat-error -->
+            <mat-error
+              *ngIf="
+                form.get(field.name)?.invalid &&
+                (form.get(field.name)?.dirty || form.get(field.name)?.touched)
+              "
+            >
+              <ng-container *ngFor="let errKey of getErrorKeys(field)">
+                <span *ngIf="form.get(field.name)?.hasError(errKey)">
+                  {{ field.errorMessages ? field.errorMessages[errKey] : "" }}
+                </span>
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Campo do tipo select -->
+          <mat-form-field
+            *ngSwitchCase="'select'"
+            appearance="fill"
+            style="width: 100%"
+          >
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControlName]="field.name">
+              <mat-option
+                *ngFor="let option of field.options"
+                [value]="option.value"
+              >
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+            <mat-error
+              *ngIf="
+                form.get(field.name)?.invalid &&
+                (form.get(field.name)?.dirty || form.get(field.name)?.touched)
+              "
+            >
+              <ng-container *ngFor="let errKey of getErrorKeys(field)">
+                <span *ngIf="form.get(field.name)?.hasError(errKey)">
+                  {{ field.errorMessages ? field.errorMessages[errKey] : "" }}
+                </span>
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+          <!-- Campo do tipo slide-toggle -->
+          <mat-slide-toggle
+            *ngSwitchCase="'slide-toggle'"
+            [formControlName]="field.name"
+          >
+            {{ field.label }}
+          </mat-slide-toggle>
+        </ng-container>
+      </div>
+    </div>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid || form.pristine"
+    >
+      {{ submitLabel }}
+    </button>
+  </div>
+</form>
