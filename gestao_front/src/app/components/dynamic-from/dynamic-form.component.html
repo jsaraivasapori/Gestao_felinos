@@ -1,21 +1,108 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 mb-3" *ngFor="let field of formConfig">
-        <ng-container [ngSwitch]="field.type">
-          <!-- Input padrão (texto, email, etc.) -->
-          <mat-form-field
-            *ngSwitchDefault
-            appearance="fill"
-            style="width: 100%"
-          >
+    <!-- Linha para os campos normais: inputs (text, number), select e date mascarado -->
+    <div class="row" *ngIf="getNonToggleAndNonTextareaFields().length > 0">
+      <ng-container *ngFor="let field of getNonToggleAndNonTextareaFields()">
+        <div class="col-md-6 mb-3">
+          <ng-container [ngSwitch]="field.type">
+            <!-- Campo do tipo select -->
+            <mat-form-field
+              *ngSwitchCase="'select'"
+              appearance="fill"
+              style="width: 100%"
+            >
+              <mat-label>{{ field.label }}</mat-label>
+              <mat-select [formControlName]="field.name">
+                <mat-option
+                  *ngFor="let option of field.options"
+                  [value]="option.value"
+                >
+                  {{ option.label }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="
+                  form.get(field.name)?.invalid &&
+                  (form.get(field.name)?.dirty || form.get(field.name)?.touched)
+                "
+              >
+                <ng-container *ngFor="let errKey of getErrorKeys(field)">
+                  <span *ngIf="form.get(field.name)?.hasError(errKey)">
+                    {{ field.errorMessages ? field.errorMessages[errKey] : "" }}
+                  </span>
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Campo do tipo date com máscara (substituindo o datepicker) -->
+            <mat-form-field
+              *ngSwitchCase="'dateMasked'"
+              appearance="fill"
+              style="width: 100%"
+            >
+              <mat-label>{{ field.label }}</mat-label>
+              <input
+                matInput
+                type="text"
+                [formControlName]="field.name"
+                placeholder="dd/mm/aaaa"
+                mask="00/00/0000"
+              />
+              <mat-error
+                *ngIf="
+                  form.get(field.name)?.invalid &&
+                  (form.get(field.name)?.dirty || form.get(field.name)?.touched)
+                "
+              >
+                <ng-container *ngFor="let errKey of getErrorKeys(field)">
+                  <span *ngIf="form.get(field.name)?.hasError(errKey)">
+                    {{ field.errorMessages ? field.errorMessages[errKey] : "" }}
+                  </span>
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Campo padrão para outros inputs (tipo text, number, etc.) -->
+            <mat-form-field
+              *ngSwitchDefault
+              appearance="fill"
+              style="width: 100%"
+            >
+              <mat-label>{{ field.label }}</mat-label>
+              <input
+                matInput
+                [formControlName]="field.name"
+                [type]="field.type"
+              />
+              <mat-error
+                *ngIf="
+                  form.get(field.name)?.invalid &&
+                  (form.get(field.name)?.dirty || form.get(field.name)?.touched)
+                "
+              >
+                <ng-container *ngFor="let errKey of getErrorKeys(field)">
+                  <span *ngIf="form.get(field.name)?.hasError(errKey)">
+                    {{ field.errorMessages ? field.errorMessages[errKey] : "" }}
+                  </span>
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Linha exclusiva para os campos do tipo textarea -->
+    <div class="row" *ngIf="getTextAreaFields().length > 0">
+      <ng-container *ngFor="let field of getTextAreaFields()">
+        <div class="col-12 mb-3">
+          <mat-form-field appearance="fill" style="width: 100%">
             <mat-label>{{ field.label }}</mat-label>
-            <input
+            <textarea
               matInput
               [formControlName]="field.name"
-              [type]="field.type"
-            />
-            <!-- Mensagens de erro com mat-error -->
+              rows="4"
+            ></textarea>
             <mat-error
               *ngIf="
                 form.get(field.name)?.invalid &&
@@ -29,45 +116,26 @@
               </ng-container>
             </mat-error>
           </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
 
-          <!-- Campo do tipo select -->
-          <mat-form-field
-            *ngSwitchCase="'select'"
-            appearance="fill"
-            style="width: 100%"
-          >
-            <mat-label>{{ field.label }}</mat-label>
-            <mat-select [formControlName]="field.name">
-              <mat-option
-                *ngFor="let option of field.options"
-                [value]="option.value"
-              >
-                {{ option.label }}
-              </mat-option>
-            </mat-select>
-            <mat-error
-              *ngIf="
-                form.get(field.name)?.invalid &&
-                (form.get(field.name)?.dirty || form.get(field.name)?.touched)
-              "
-            >
-              <ng-container *ngFor="let errKey of getErrorKeys(field)">
-                <span *ngIf="form.get(field.name)?.hasError(errKey)">
-                  {{ field.errorMessages ? field.errorMessages[errKey] : "" }}
-                </span>
-              </ng-container>
-            </mat-error>
-          </mat-form-field>
-          <!-- Campo do tipo slide-toggle -->
-          <mat-slide-toggle
-            *ngSwitchCase="'slide-toggle'"
-            [formControlName]="field.name"
-          >
-            {{ field.label }}
-          </mat-slide-toggle>
-        </ng-container>
+    <!-- Linha para os campos do tipo slide-toggle -->
+    <div class="row" *ngIf="getToggles().length > 0">
+      <div class="col-12">
+        <div class="d-flex flex-wrap align-items-center">
+          <ng-container *ngFor="let toggle of getToggles()">
+            <div class="p-2" style="min-width: 200px">
+              <mat-slide-toggle [formControlName]="toggle.name">
+                {{ toggle.label }}
+              </mat-slide-toggle>
+            </div>
+          </ng-container>
+        </div>
       </div>
     </div>
+
+    <!-- Botão de submissão -->
     <button
       mat-flat-button
       color="primary"

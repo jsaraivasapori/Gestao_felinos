@@ -6,6 +6,7 @@ import { VacinasComponent } from './pages/vacinas/vacinas.component';
 import { ProcedimentosComponent } from './pages/procedimentos/procedimentos.component';
 import { VoluntariosComponent } from './pages/voluntarios/voluntarios.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { FelinosFormComponent } from './pages/felinos/edit-felinos/felinos-form.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,12 @@ export const routes: Routes = [
       {
         path: 'felinos',
         component: FelinosComponent,
+        children: [
+          {
+            component: FelinosFormComponent,
+            path: 'form',
+          },
+        ],
       },
       {
         path: 'vacinas',

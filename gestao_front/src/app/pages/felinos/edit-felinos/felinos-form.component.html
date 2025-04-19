@@ -1,0 +1,13 @@
+<div class="container mt-4">
+  <!-- Título dinâmico: Exibe "Editar Registro" ou "Adicionar Novo Registro" -->
+  <h2>{{ isEditMode ? "Editar Registro" : "Adicionar Novo Registro" }}</h2>
+
+  <!-- Componente dinâmico do formulário -->
+  <app-dynamic-form
+    [formConfig]="formConfig"
+    [initialData]="initialData"
+    [submitLabel]="isEditMode ? 'Atualizar' : 'Adicionar'"
+    (formSubmitted)="onFormSubmitted($event)"
+  >
+  </app-dynamic-form>
+</div>

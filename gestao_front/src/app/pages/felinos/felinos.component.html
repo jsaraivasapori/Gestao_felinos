@@ -1,5 +1,6 @@
 <h1>Felinos</h1>
 <div class="container-fluid">
+  @if(isCreating){
   <div class="teste">
     <app-expandable-table
       [dataSource]="elementos"
@@ -26,11 +27,20 @@
       <ng-template #expandedRowContent let-element>
         <div class="custom-expanded-content">
           <h3>Detalhes de {{ element.nome }}</h3>
-          <p>Cargo: {{ element.cargo }}</p>
+          <p>Raça: {{ element.raca }}</p>
           <p>Idade: {{ element.idade }}</p>
-          <p>Departamento: {{ element.departamento }}</p>
+          <p>Data do Resgate : {{ element.dataResgate }}</p>
+          <p>Em Isolmento: {{ element.isolamento }}</p>
+          <p>Tem FIV: {{ element.fiv }}</p>
+          <p>Tem FELV: {{ element.felv }}</p>
+          <p>Tem PIF: {{ element.pif }}</p>
+          <p>Observaçoes: {{ element.observacao }}</p>
+          <button mat-stroked-button (click)="toEdit(element)">Editar</button>
         </div>
       </ng-template>
     </app-expandable-table>
   </div>
+  }@else {
+  <router-outlet></router-outlet>
+  }
 </div>

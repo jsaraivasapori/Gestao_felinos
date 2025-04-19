@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ExpandableTableComponent } from '../../components/expandable-table/expandable-table.component';
+import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { SharedService } from '../../services/shared.service';
 interface Funcionario {
   nome: string;
   idade: number;
@@ -12,33 +15,55 @@ interface Funcionario {
 @Component({
   selector: 'app-felinos',
   standalone: true,
-  imports: [ExpandableTableComponent],
+  imports: [ExpandableTableComponent, MatButtonModule, RouterOutlet],
   templateUrl: './felinos.component.html',
   styleUrl: './felinos.component.scss',
 })
 export class FelinosComponent {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private shared: SharedService
+  ) {}
+
+  isCreating: boolean = true;
   elementos: any[] = [
     {
+      id: 1,
       nome: 'Duda',
       idade: 9,
-      raca: 'Sem raça',
-      fiv: false,
-      felv: false,
-      pif: false,
-      isolamento: false,
-    },
-    {
-      nome: 'Bertingo',
-      idade: 1,
-      raca: 'Sem raça',
+      raca: 'sem raca',
+      dataResgate: '20/08/2016',
       fiv: false,
       felv: false,
       pif: false,
       isolamento: true,
+      observacao:
+        'lsmakmsakls sasjalks alsklasçlask asmlalsças a ssajskajslkajslkasasçamsçasmçl,ç snasjkajsaksjasjm askjaskasaks',
+    },
+    {
+      id: 2,
+      nome: 'Bertingo',
+      idade: 1,
+      raca: 'Sem raça',
+      dataResgate: '20/08/2016',
+      fiv: false,
+      felv: false,
+      pif: false,
+      isolamento: true,
+      observacao:
+        'lsmakmsakls sasjalks alsklasçlask asmlalsças a ssajskajslkajslkasasçamsçasmçl,ç snasjkajsaksjasjm askjaskasaks',
     },
   ];
 
   onRowToggled(element: Funcionario | null): void {
     console.log('Linha expandida:', element);
+  }
+
+  toEdit(data: any): void {
+    console.log(data);
+    this.isCreating = false;
+    this.shared.setData('felinoToUpdate', data);
+    this.router.navigate(['form'], { relativeTo: this.route });
   }
 }

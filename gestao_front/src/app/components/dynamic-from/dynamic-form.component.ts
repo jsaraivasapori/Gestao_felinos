@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxMaskDirective } from 'ngx-mask';
 @Component({
   selector: 'app-dynamic-form',
   standalone: true,
@@ -18,6 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatButtonModule,
     MatSelectModule,
     MatSlideToggleModule,
+    NgxMaskDirective,
   ],
   templateUrl: './dynamic-form.component.html',
   styleUrl: './dynamic-form.component.scss',
@@ -55,5 +57,22 @@ export class DynamicFormComponent implements OnInit {
   getErrorKeys(field: FormField): string[] {
     // Retorna as chaves dos erros definidos na configuração de mensagens de erro
     return field.errorMessages ? Object.keys(field.errorMessages) : [];
+  }
+
+  // Retorna os campos que não são slide-toggle nem textarea
+  getNonToggleAndNonTextareaFields(): FormField[] {
+    return this.formConfig.filter(
+      (field) => field.type !== 'slide-toggle' && field.type !== 'textarea'
+    );
+  }
+
+  // Filtra apenas os campos do tipo textarea
+  getTextAreaFields(): FormField[] {
+    return this.formConfig.filter((field) => field.type === 'textarea');
+  }
+
+  // Filtra somente os campos do tipo slide-toggle
+  getToggles(): FormField[] {
+    return this.formConfig.filter((field) => field.type === 'slide-toggle');
   }
 }
