@@ -25,17 +25,93 @@
       (rowToggled)="onRowToggled($event)"
     >
       <ng-template #expandedRowContent let-element>
-        <div class="custom-expanded-content">
-          <h3>Detalhes de {{ element.nome }}</h3>
-          <p>Raça: {{ element.raca }}</p>
-          <p>Idade: {{ element.idade }}</p>
-          <p>Data do Resgate : {{ element.dataResgate }}</p>
-          <p>Em Isolmento: {{ element.isolamento }}</p>
-          <p>Tem FIV: {{ element.fiv }}</p>
-          <p>Tem FELV: {{ element.felv }}</p>
-          <p>Tem PIF: {{ element.pif }}</p>
-          <p>Observaçoes: {{ element.observacao }}</p>
-          <button mat-stroked-button (click)="toEdit(element)">Editar</button>
+        <div class="p-3">
+          <h3>Informações de {{ element.nome }}</h3>
+          <div class="container">
+            <p class="row w-50">
+              <span class="label-container col-md-6">Nome: </span>
+              <span class="info col-md-6">{{ element.nome }}</span>
+            </p>
+            <p class="row w-50">
+              <span class="label-container col-md-6">Raça: </span>
+              <span class="info col-md-6">{{ element.raca }}</span>
+            </p>
+            <p class="row w-50">
+              <span class="label-container col-md-6">Idade:</span>
+              <span class="info col-md-6">{{ element.idade }} ano(s)</span>
+            </p>
+            <p class="row w-50">
+              <span class="label-container col-md-6">Data do Resgate:</span>
+              <span class="info col-md-6">{{ element.dataResgate }}</span>
+            </p>
+            <p class="row w-50">
+              <span class="label-container col-md-6">Em Isolmento:</span>
+              <span class="info col-md-6"
+                ><mat-icon
+                  [class.positive]="element.isolamento"
+                  [class.negative]="!element.isolamento"
+                  >{{ element.isolamento | booleanIcon }}</mat-icon
+                ></span
+              >
+            </p>
+            <p class="row w-50">
+              <span class="label-container col-md-6">Tem FIV:</span>
+              <span class="info col-md-6"
+                ><mat-icon
+                  [class.positive]="element.fiv"
+                  [class.negative]="!element.fiv"
+                  >{{ element.fiv | booleanIcon }}</mat-icon
+                ></span
+              >
+            </p>
+            <p class="row w-50">
+              <span class="label-container col-md-6">Tem FELV:</span>
+              <span class="info col-md-6">
+                <mat-icon
+                  [class.positive]="element.FELV"
+                  [class.negative]="!element.FELV"
+                  >{{ element.felv | booleanIcon }}</mat-icon
+                >
+              </span>
+            </p>
+            <p class="row w-50">
+              <span class="label-container col-md-6">Tem PIF:</span>
+              <span class="info col-md-6"
+                ><mat-icon
+                  [class.positive]="element.pif"
+                  [class.negative]="!element.pif"
+                  >{{ element.pif | booleanIcon }}</mat-icon
+                ></span
+              >
+            </p>
+            <p class="row">
+              <span>Observaçoes:</span>
+            </p>
+            <p class="obs-container row">
+              <span class="info w-100">{{ element.observacao }}</span>
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-lg-3 m-2">
+              <button
+                mat-raised-button
+                (click)="toEdit(element)"
+                color="primary"
+              >
+                Editar
+              </button>
+            </div>
+            <div class="col-md-4 col-lg-3 m-2">
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="toEdit(element)"
+                class="excluir"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
         </div>
       </ng-template>
     </app-expandable-table>

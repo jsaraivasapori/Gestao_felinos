@@ -3,6 +3,10 @@ import { ExpandableTableComponent } from '../../components/expandable-table/expa
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
+import { MatCardModule } from '@angular/material/card';
+import { BooleanIconPipe } from '../../pipes/boolean-icon/boolean-icon.pipe';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 interface Funcionario {
   nome: string;
   idade: number;
@@ -15,7 +19,15 @@ interface Funcionario {
 @Component({
   selector: 'app-felinos',
   standalone: true,
-  imports: [ExpandableTableComponent, MatButtonModule, RouterOutlet],
+  imports: [
+    ExpandableTableComponent,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+    MatCardModule,
+    BooleanIconPipe,
+    RouterOutlet,
+  ],
   templateUrl: './felinos.component.html',
   styleUrl: './felinos.component.scss',
 })
@@ -39,7 +51,7 @@ export class FelinosComponent {
       pif: false,
       isolamento: true,
       observacao:
-        'lsmakmsakls sasjalks alsklasçlask asmlalsças a ssajskajslkajslkasasçamsçasmçl,ç snasjkajsaksjasjm askjaskasaks',
+        'lsmakmsakls sasjalks alsklasçlask assdddddd ddddddd ddddddd dddddddd ddddddddddddd ddddddddddd  ddddddddddddddd ddddddddd  dddddd ddddddmlalsças a ssajskajslkajslkasasçamsçasmçl,ç snasjkajsaksjasjm askjaskasaks',
     },
     {
       id: 2,

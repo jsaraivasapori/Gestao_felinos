@@ -1,0 +1,43 @@
+p {
+  font-size: 18px;
+  color: var(--font-color);
+  font-weight: 500;
+}
+
+button {
+  width: 100%;
+}
+
+button .excluir {
+  background-color: aquamarine !important;
+}
+
+.info {
+  font-size: 16px;
+  font-weight: 400;
+}
+.obs-container {
+  overflow: hidden;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  text-align: justify;
+}
+.label-container,
+.info {
+  flex: 1; /* cada span ocupará o mesmo espaço */
+}
+
+mat-icon {
+  font-size: 30px;
+  height: 30px;
+  width: 30px;
+  vertical-align: middle;
+
+  &.positive {
+    color: #f44336;
+  } /* Vermelho para true */
+  &.negative {
+    color: #42a746;
+  } /* Verde para false */
+}
