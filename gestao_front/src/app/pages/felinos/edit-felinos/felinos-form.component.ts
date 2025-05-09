@@ -3,6 +3,7 @@ import { DynamicFormComponent } from '../../../components/dynamic-from/dynamic-f
 import { Validators } from '@angular/forms';
 import { FormField } from '../../../models/form-field';
 import { SharedService } from '../../../services/shared.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-felinos-form',
@@ -13,6 +14,7 @@ import { SharedService } from '../../../services/shared.service';
 })
 export class FelinosFormComponent {
   @Input() data: any;
+
   // Configuração dos campos do formulário
   formConfig: FormField[] = [
     {
@@ -24,7 +26,7 @@ export class FelinosFormComponent {
     },
     {
       name: 'idade',
-      label: 'Idade',
+      label: 'Idade em anos',
       type: 'number',
       validators: [Validators.required],
       errorMessages: {
@@ -86,7 +88,11 @@ export class FelinosFormComponent {
   isEditMode: boolean = false;
 
   initialData: any;
-  constructor(private shared: SharedService) {}
+  constructor(
+    private shared: SharedService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.initialData = this.shared.getData('felinoToUpdate');
@@ -109,5 +115,6 @@ export class FelinosFormComponent {
     console.log('Formulário submetido:', formValue);
     // Aqui você pode chamar sua API (POST para criação ou PUT para atualização)
     // Exemplo: this.apiService.save(formValue).subscribe(...);
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

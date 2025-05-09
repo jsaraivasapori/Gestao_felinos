@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ExpandableTableComponent } from '../../components/expandable-table/expandable-table.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { MatCardModule } from '@angular/material/card';
 import { BooleanIconPipe } from '../../pipes/boolean-icon/boolean-icon.pipe';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 interface Funcionario {
   nome: string;
@@ -37,8 +37,7 @@ export class FelinosComponent {
     private route: ActivatedRoute,
     private shared: SharedService
   ) {}
-
-  isCreating: boolean = true;
+  @Input() isCreating: boolean = true;
   elementos: any[] = [
     {
       id: 1,
@@ -64,7 +63,7 @@ export class FelinosComponent {
       pif: false,
       isolamento: true,
       observacao:
-        'lsmakmsakls sasjalks alsklasçlask asmlalsças a ssajskajslkajslkasasçamsçasmçl,ç snasjkajsaksjasjm askjaskasaks',
+        'lsmakmsakls sasjalks alsklasçlask asmlalsças a ssajskajslkajslkasasçamsçasmçl,ç snasjkajsaksjasjm askjaskasajv',
     },
   ];
 

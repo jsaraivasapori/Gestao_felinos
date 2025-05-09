@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="container">
+  <div class="container-fluid">
     <!-- Linha para os campos normais: inputs (text, number), select e date mascarado -->
     <div class="row" *ngIf="getNonToggleAndNonTextareaFields().length > 0">
       <ng-container *ngFor="let field of getNonToggleAndNonTextareaFields()">
@@ -144,5 +144,6 @@
     >
       {{ submitLabel }}
     </button>
+    <button mat-flat-button color="warn">Cancelar</button>
   </div>
 </form>
