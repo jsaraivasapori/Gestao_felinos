@@ -1,4 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --primary-color: #d7e3ff;
+  --secondary-color: #c0cbe4;
+  --error-color: #ac2828;
+  --font-color: #001b3f;
+  --background-color: #fafafa;
+  --gray-color: #cfcfcf;
+  --blue: #005cbb;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.cursor-pointer:hover {
+  cursor: pointer;
+}
