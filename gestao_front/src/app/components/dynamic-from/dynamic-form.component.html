@@ -144,6 +144,8 @@
     >
       {{ submitLabel }}
     </button>
-    <button mat-flat-button color="warn">Cancelar</button>
+    <button type="button" mat-flat-button color="warn" (click)="onCancel()">
+      Cancelar
+    </button>
   </div>
 </form>

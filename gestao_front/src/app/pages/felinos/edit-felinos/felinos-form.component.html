@@ -1,6 +1,6 @@
 <div class="container-fluid mt-4">
   <!-- Título dinâmico: Exibe "Editar Registro" ou "Adicionar Novo Registro" -->
-  <h2>{{ isEditMode ? "Editando Registro" : "Adicionando Novo Registro" }}</h2>
+  <h3>{{ isEditMode ? "Editando Registro" : "Adicionando Novo Registro" }}</h3>
 
   <!-- Componente dinâmico do formulário -->
   <app-dynamic-form
@@ -8,6 +8,7 @@
     [initialData]="initialData"
     [submitLabel]="isEditMode ? 'Atualizar' : 'Adicionar'"
     (formSubmitted)="onFormSubmitted($event)"
+    (cancel)="onCancel()"
   >
   </app-dynamic-form>
 </div>

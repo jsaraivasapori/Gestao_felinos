@@ -28,7 +28,8 @@ export class DynamicFormComponent implements OnInit {
   @Input() formConfig: FormField[] = []; // Configuração dos campos
   @Input() initialData: any = {}; // Dados iniciais para o formulário
   @Input() submitLabel: string = 'Enviar'; // Texto do botão de envio
-  @Output() formSubmitted = new EventEmitter<any>(); // Emite os dados do formulário
+  @Output() formSubmitted = new EventEmitter<any>(); // Emite os dados do formulário para ser tratado no componente pai
+  @Output() cancel = new EventEmitter<void>(); // emite evento de cancelamento para ser tratado no componente pai
 
   form!: FormGroup;
 
@@ -52,6 +53,9 @@ export class DynamicFormComponent implements OnInit {
       this.formSubmitted.emit(this.form.value);
       console.log(this.form.value);
     }
+  }
+  onCancel(): void {
+    this.cancel.emit(); //emite o evento de cancelamento ao clicar no botao de cancelar
   }
 
   getErrorKeys(field: FormField): string[] {

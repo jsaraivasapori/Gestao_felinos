@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ExpandableTableComponent } from '../../components/expandable-table/expandable-table.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -7,15 +7,6 @@ import { MatCardModule } from '@angular/material/card';
 import { BooleanIconPipe } from '../../pipes/boolean-icon/boolean-icon.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-interface Funcionario {
-  nome: string;
-  idade: number;
-  raca: string;
-  fiv: boolean;
-  felv: boolean;
-  pif: boolean;
-  isolamento: boolean;
-}
 @Component({
   selector: 'app-felinos',
   standalone: true,
@@ -35,9 +26,10 @@ export class FelinosComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private shared: SharedService
+    private sharedService: SharedService
   ) {}
-  @Input() isCreating: boolean = true;
+  showTable: boolean = true;
+
   elementos: any[] = [
     {
       id: 1,
@@ -66,15 +58,26 @@ export class FelinosComponent {
         'lsmakmsakls sasjalks alsklasçlask asmlalsças a ssajskajslkajslkasasçamsçasmçl,ç snasjkajsaksjasjm askjaskasajv',
     },
   ];
-
-  onRowToggled(element: Funcionario | null): void {
-    console.log('Linha expandida:', element);
+  /**
+   * Método getter para saber qual rota está.
+   *
+   *
+   *
+   *
+   */
+  get isFormRoute(): boolean {
+    return this.router.url === '/home/felinos/form';
   }
 
   toEdit(data: any): void {
     console.log(data);
-    this.isCreating = false;
-    this.shared.setData('felinoToUpdate', data);
+    this.showTable = false;
+    this.sharedService.setData('currentFeline', data);
+    this.router.navigate(['form'], { relativeTo: this.route });
+  }
+
+  addNewFeline(): void {
+    this.sharedService.clearData('currentFeline');
     this.router.navigate(['form'], { relativeTo: this.route });
   }
 }

@@ -1,6 +1,17 @@
 <h1>Cadastro de Felinos</h1>
+
 <div class="container-fluid">
-  @if(isCreating){
+  @if(!isFormRoute){
+  <div class="w-25 p-3">
+    <button
+      mat-button
+      mat-raised-button
+      (click)="addNewFeline()"
+      color="primary"
+    >
+      Adicionar
+    </button>
+  </div>
   <div>
     <app-expandable-table
       [dataSource]="elementos"
@@ -22,7 +33,6 @@
         pif: 'PIF',
         isolamento: 'Isolamento'
       }"
-      (rowToggled)="onRowToggled($event)"
     >
       <ng-template #expandedRowContent let-element>
         <div class="p-1">

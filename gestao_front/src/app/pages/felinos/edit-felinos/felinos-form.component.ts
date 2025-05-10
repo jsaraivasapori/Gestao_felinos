@@ -89,32 +89,44 @@ export class FelinosFormComponent {
 
   initialData: any;
   constructor(
-    private shared: SharedService,
+    private sharedService: SharedService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.initialData = this.shared.getData('felinoToUpdate');
+    this.initialData = this.sharedService.getData('currentFeline');
     // Se estiver no modo de edição, preenche os dados iniciais
     // (exemplo fictício, ajuste conforme a sua lógica)
-    if (this.initialData.id) {
-      if (this.initialData && this.initialData.id) {
-        this.isEditMode = true;
-      }
+
+    if (this.initialData && this.initialData.id) {
+      this.isEditMode = true;
+    } else {
+      this.isEditMode = false;
+      this.initialData = {};
     }
+  }
+
+  ngOnDestroy(): void {
+    this.sharedService.clearData('currentFeline');
   }
   /**
    * Método chamado quando o formulário for submetido.
-   * Recebe os dados do formulário e realiza a ação necessária
+   * Recebe os dados do formulário do output formSubmitted do dynamic-form e realiza a ação necessária
    * (por exemplo, uma chamada HTTP para atualizar ou criar um registro).
    *
-   * @param formValue - Os dados enviados pelo formulário.
+   * @param formValue - Os dados enviados pelo formulário dynamic-form.
    */
   onFormSubmitted(formValue: any): void {
     console.log('Formulário submetido:', formValue);
     // Aqui você pode chamar sua API (POST para criação ou PUT para atualização)
     // Exemplo: this.apiService.save(formValue).subscribe(...);
+    this.sharedService.clearData('currentFeline');
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  onCancel(): void {
+    this.sharedService.clearData('currentFeline');
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

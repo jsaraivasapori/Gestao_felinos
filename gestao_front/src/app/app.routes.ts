@@ -29,6 +29,10 @@ export const routes: Routes = [
             component: FelinosFormComponent,
             path: 'form',
           },
+          {
+            component: FelinosComponent,
+            path: 'novo',
+          },
         ],
       },
       {
