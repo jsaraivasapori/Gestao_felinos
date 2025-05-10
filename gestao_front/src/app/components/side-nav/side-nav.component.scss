@@ -1,0 +1,156 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.background-content {
+  background-color: var(--background-color) !important;
+}
+.toolbar {
+  background-color: var(--primary-color);
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 16px;
+
+  button[mat-icon-button] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+
+    .menu {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+    }
+    .logout {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  h1.title {
+    color: var(--font-color);
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fixed-right {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.sidenav-container {
+  flex: 1;
+  margin-top: 0px !important;
+
+  mat-sidenav {
+    width: 250px;
+    background-color: #fff;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 600px) {
+      width: 65vw;
+    }
+    mat-nav-list {
+      .sidenav-list {
+        list-style-type: none;
+        padding: 1rem;
+      }
+      .list-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        &:hover {
+          border-radius: 20px;
+          color: var(--blue);
+          background-color: var(--primary-color);
+          transition: 150ms;
+          transform: scale(1.05);
+        }
+      }
+      span {
+        margin: 0.5rem;
+      }
+      mat-icon {
+        font-size: 40px;
+        margin-right: 10px;
+        position: relative;
+        bottom: 2px;
+      }
+      p {
+        margin-bottom: 0;
+        line-height: 1.5;
+        position: relative;
+        top: 3px;
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  mat-sidenav-content {
+    background-color: var(--background-color);
+    margin: 15px;
+  }
+}
+
+// Ajustes para mobile
+.example-is-mobile {
+  .toolbar {
+    height: 56px;
+    padding: 0 8px;
+
+    h1.title {
+      font-size: 1.2rem;
+    }
+
+    .menu {
+      font-size: 28px !important;
+      width: 28px !important;
+      height: 28px !important;
+    }
+
+    .fixed-right {
+      font-size: 28px !important;
+      width: 28px !important;
+      height: 28px !important;
+      right: 8px;
+    }
+  }
+}
+
+// Correção para alinhamento global de ícones
+mat-icon {
+  display: inline-flex !important;
+  overflow: visible;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+.material-icons {
+  font-size: 40px !important;
+}

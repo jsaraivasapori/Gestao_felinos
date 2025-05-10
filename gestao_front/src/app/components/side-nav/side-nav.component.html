@@ -1,0 +1,81 @@
+<div class="app-container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon class="menu">menu</mat-icon>
+    </button>
+    <h1 class="title">Gestão Felinos</h1>
+    <button mat-icon-button class="fixed-right">
+      <mat-icon class="logout">logout</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container
+    class="sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      opened
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list class="flex-column d-flex">
+        <ul class="sidenav-list">
+          <li
+            class="list-item"
+            routerLink="/home/dashboard"
+            (click)="backToDashboard()"
+          >
+            <span><mat-icon>dashboard</mat-icon></span>
+            <p>Dashboard</p>
+          </li>
+          <li
+            class="list-item"
+            routerLink="/home/felinos"
+            (click)="backToFelinos()"
+          >
+            <span><mat-icon>pets</mat-icon></span>
+            <p>Felinos</p>
+          </li>
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToVacinas()"
+          >
+            <span><mat-icon>vaccines</mat-icon></span>
+            <p>Vacinas</p>
+          </li>
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToProcedimentos()"
+          >
+            <span><mat-icon>local_hospital</mat-icon></span>
+            <p>Procedimentos</p>
+          </li>
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToVoluntarios()"
+          >
+            <span><mat-icon>group</mat-icon></span>
+            <p>Voluntários</p>
+          </li>
+          <li
+            class="list-item"
+            routerLink="/home/vacinas"
+            (click)="backToUsuarios()"
+          >
+            <span><mat-icon>manage_accounts</mat-icon></span>
+            <p>Usuários</p>
+          </li>
+        </ul>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="background-content content-container">
+      <ng-content select="[drawer-content]"></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

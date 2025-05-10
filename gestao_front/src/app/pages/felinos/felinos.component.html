@@ -1,0 +1,153 @@
+<h1>Cadastro de Felinos</h1>
+
+<div class="container-fluid">
+  @if(!isFormRoute){
+  <div class="w-25 p-3">
+    <button
+      mat-button
+      mat-raised-button
+      (click)="addNewFeline()"
+      color="primary"
+    >
+      Adicionar
+    </button>
+  </div>
+  <div>
+    <app-expandable-table
+      [dataSource]="elementos"
+      [columnsToDisplay]="[
+        'nome',
+        'idade',
+        'raca',
+        'fiv',
+        'felv',
+        'pif',
+        'isolamento'
+      ]"
+      [columnHeaders]="{
+        nome: 'Nome',
+        idade: 'Idade (anos)',
+        raca: 'Raça',
+        fiv: 'FIV',
+        felv: 'FELV',
+        pif: 'PIF',
+        isolamento: 'Isolamento'
+      }"
+    >
+      <ng-template #expandedRowContent let-element>
+        <div class="p-1">
+          <h3>Informações de {{ element.nome }}</h3>
+          <div class="container-fluid">
+            <div class="row g-0">
+              <!-- Colunas dos elementos não icones -->
+
+              <div class="col-lg-6 col-lg-12 col-xxl-6">
+                <div class="row g-0">
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">Nome: </span>
+                    <span class="info">{{ element.nome }}</span>
+                  </div>
+
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">Raça: </span>
+                    <span class="info">{{ element.raca }}</span>
+                  </div>
+
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">Idade:</span>
+                    <span class="info">{{ element.idade }} ano(s)</span>
+                  </div>
+
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">Resgate:</span>
+                    <span class="info">{{ element.dataResgate }}</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Coluna dos icones -->
+
+              <div class="col-lg-6 col-lg-12 col-xxl-6 position-midia-query">
+                <div class="row g-0">
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">Isolmento:</span>
+                    <span class="info"
+                      ><mat-icon
+                        [class.positive]="element.isolamento"
+                        [class.negative]="!element.isolamento"
+                        >{{ element.isolamento | booleanIcon }}</mat-icon
+                      ></span
+                    >
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">FIV:</span>
+                    <span class="info"
+                      ><mat-icon
+                        [class.positive]="element.fiv"
+                        [class.negative]="!element.fiv"
+                        >{{ element.fiv | booleanIcon }}</mat-icon
+                      ></span
+                    >
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">FELV:</span>
+                    <span class="info">
+                      <mat-icon
+                        [class.positive]="element.FELV"
+                        [class.negative]="!element.FELV"
+                        >{{ element.felv | booleanIcon }}</mat-icon
+                      >
+                    </span>
+                  </div>
+                  <div class="col-6 col-sm-3">
+                    <span class="label-content">PIF:</span>
+                    <span class="info"
+                      ><mat-icon
+                        [class.positive]="element.pif"
+                        [class.negative]="!element.pif"
+                        >{{ element.pif | booleanIcon }}</mat-icon
+                      ></span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="row">
+                  <span class="label-content">Observaçoes:</span>
+                  <div class="obs-content">
+                    <span class="info">{{ element.observacao }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row dos botoês de ação -->
+          <div class="row">
+            <div class="col-2 m-3">
+              <button
+                mat-raised-button
+                (click)="toEdit(element)"
+                color="primary"
+              >
+                Editar
+              </button>
+            </div>
+            <div class="col-2 m-3">
+              <button
+                mat-raised-button
+                color="warn"
+                (click)="toEdit(element)"
+                class="excluir"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </app-expandable-table>
+  </div>
+  }@else {
+  <router-outlet></router-outlet>
+  }
+</div>
